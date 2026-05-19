@@ -1,0 +1,24 @@
+#!/bin/sh
+#PBS -N python
+#PBS -l nodes=c002:ppn=72
+#PBS -l walltime=720:00:00
+
+
+# 主要变量定义
+
+CGCNN_DIR="/home/ljw/tzb/4.cgcnn/cgcnn-master"
+PYTHON_SCRIPT="$CGCNN_DIR/predict.py"
+data_dir="/home/ljw/tzb/4.cgcnn/cgcnn-master/data/ABC2X6_cif"
+RESULTS_DIR="$CGCNN_DIR/result"
+TEST_RESULTS_FILE="$CGCNN_DIR/test_results.csv"
+
+cd $PBS_O_WORKDIR
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate cgcnn
+
+for i in {1..100}
+do
+    model="$CGCNN_DIR/model/PU_more/$i.pth.tar"
+    python predict.py $model $data_dir     
+    cp $TEST_RESULTS_FILE "$RESULTS_DIR/test_results_$i.csv"
+done
