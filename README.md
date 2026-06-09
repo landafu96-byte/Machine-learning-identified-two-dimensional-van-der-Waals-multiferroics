@@ -55,7 +55,7 @@ A Python program for calculating out-of-plane polarization in two-dimensional fe
 To calculate the out-of-plane polarization, the following four files are required:
 
 - `POSCAR`
-- `val.json`
+- `zval.json`
 - `NGZF.txt`
 - `PLANAR_AVERAGE.dat`
 
@@ -88,7 +88,7 @@ It can be extracted from `OUTCAR` using:
 grep NGZF OUTCAR | head -n 1 | awk '{print $8}' > NGZF.txt
 ```
 
-### 4. val.json
+### 4. zval.json
 `val.json` contains the number of valence electrons for each element in the structure.  
 It can be generated using the `val.py` script under your working directory:
 
